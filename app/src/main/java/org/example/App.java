@@ -35,5 +35,7 @@ public class App extends Application {
         databaseInterface.cleanup();
 
         System.out.println(new App().getGreeting());
+
+        launch();
     }
 }
