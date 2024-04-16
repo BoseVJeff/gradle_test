@@ -3,6 +3,3 @@
 
 # Ignore Gradle build output directory
 build
-
-# Ignore `Credentials.java`
-app/src/main/java/org/example/Credentials.java

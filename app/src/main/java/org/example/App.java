@@ -5,20 +5,45 @@ package org.example;
 
 import java.sql.*;
 
-import org.example.database_utils.Database;
-import org.example.database_utils.DatabaseInterface;
+import oracle.jdbc.*;
+import oracle.jdbc.pool.OracleDataSource;
 
 public class App {
     public String getGreeting() {
         return "Hello World!";
     }
 
-    public static void main(String[] args) throws SQLException {
-        DatabaseInterface databaseInterface = new Database();
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        OracleDataSource ods = new OracleDataSource();
 
-        databaseInterface.testDatabaseConnection();
+        // Connection connection =
+        // DriverManager.getConnection("jdbc:oracle:thin:SYSTEM/manager@localhost:1521");
+        ods.setURL("jdbc:oracle:thin:SYSTEM/manager@localhost:1521");
 
-        databaseInterface.cleanup();
+        Connection connection = ods.getConnection();
+
+        // Create Oracle DatabaseMetaData object
+        DatabaseMetaData meta = connection.getMetaData();
+
+        // gets driver info:
+        System.out.println("JDBC driver version is " + meta.getDriverVersion());
+
+        String query = "SELECT SYSDATE FROM DUAL";
+        Statement statement = connection.createStatement();
+
+        ResultSet rSet = statement.executeQuery(query);
+
+        while (rSet.next()) {
+            System.out.println("Current date is " + rSet.getString("SYSDATE"));
+        }
+
+        rSet.close();
+
+        statement.close();
+
+        connection.close();
+
+        // OracleDataSource
 
         System.out.println(new App().getGreeting());
     }
