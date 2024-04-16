@@ -16,6 +16,17 @@ public class App extends Application {
         return "Hello World!";
     }
 
+    @Override
+    public void start(Stage stage) {
+        String javaVersion = System.getProperty("java.version");
+        String javafxVersion = System.getProperty("javafx.version");
+        Label l = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
+        Scene scene = new Scene(new StackPane(l), 640, 480);
+        stage.setScene(scene);
+        stage.setTitle("Hello World!");
+        stage.show();
+    }
+
     public static void main(String[] args) throws SQLException {
         DatabaseInterface databaseInterface = new Database();
 
@@ -24,18 +35,5 @@ public class App extends Application {
         databaseInterface.cleanup();
 
         System.out.println(new App().getGreeting());
-
-        launch();
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-        String javaVersion = System.getProperty("java.version");
-        String javafxVersion = System.getProperty("javafx.version");
-        Label l = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-        Scene scene = new Scene(new StackPane(l), 640, 480);
-        stage.setScene(scene);
-        stage.setTitle("JavaFX Window");
-        stage.show();
     }
 }
