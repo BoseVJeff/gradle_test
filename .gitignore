@@ -6,3 +6,7 @@ build
 
 # Ignore `Credentials.java`
 app/src/main/java/org/example/Credentials.java
+
+# Ignore compiled classes
+*.class
+app/bin/main/org/example/App.class
