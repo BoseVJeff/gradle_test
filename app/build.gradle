@@ -56,5 +56,4 @@ javafx {
     modules = [ 'javafx.controls' ]
 }
 
-
 version='1.0.0'
