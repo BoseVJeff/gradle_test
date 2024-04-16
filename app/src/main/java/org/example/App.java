@@ -6,12 +6,20 @@ package org.example;
 import java.sql.*;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class App extends Application {
+    private int counter = 0;
+
+    private int windowWidth = 640;
+    private int windowHeight = 480;
+
     public String getGreeting() {
         return "Hello World!";
     }
@@ -21,7 +29,29 @@ public class App extends Application {
         String javaVersion = System.getProperty("java.version");
         String javafxVersion = System.getProperty("javafx.version");
         Label l = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-        Scene scene = new Scene(new StackPane(l), 640, 480);
+        // Base Pane
+        StackPane rootStackPane = new StackPane(l);
+
+        StackPane popupStackPane = new StackPane(new Label("Hello from popup!"));
+        Scene buttonScene = new Scene(popupStackPane, windowWidth, windowHeight);
+        // Button
+        Button button = new Button();
+        button.setText("Say Hello World!");
+        button.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Hello World!");
+                counter++;
+                stage.setTitle("Button pressed " + counter + " times");
+                stage.setScene(buttonScene);
+            }
+        });
+
+        // Adding button to UI Tree
+        rootStackPane.getChildren().add(button);
+
+        Scene scene = new Scene(rootStackPane, windowWidth, windowHeight);
         stage.setScene(scene);
         stage.setTitle("Hello World!");
         stage.show();
