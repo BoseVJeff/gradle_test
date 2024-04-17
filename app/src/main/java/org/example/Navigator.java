@@ -31,7 +31,8 @@ public class Navigator {
         this.windowWidth = 640;
         this.windowHeight = 480;
         this.defaultScene = this.createDefaultScene();
-        this.scenes = new Scene[] { this.defaultScene };
+        this.scenes = new Scene[10];
+        this.scenes[0] = this.defaultScene;
         this.headIndex = 0;
     }
 
@@ -44,7 +45,8 @@ public class Navigator {
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;
         this.defaultScene = this.createDefaultScene();
-        this.scenes = new Scene[] { this.defaultScene };
+        this.scenes = new Scene[10];
+        this.scenes[0] = this.defaultScene;
         this.headIndex = 0;
     }
 
@@ -56,7 +58,8 @@ public class Navigator {
         this.stage = stage;
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;
-        this.scenes = new Scene[] { new Scene(initialPane, this.windowWidth, this.windowHeight) };
+        this.scenes = new Scene[10];
+        this.scenes[0] = new Scene(initialPane, this.windowWidth, this.windowHeight);
         this.headIndex = 0;
         this.defaultScene = this.createDefaultScene();
     }
@@ -69,6 +72,11 @@ public class Navigator {
         StackPane stackPane = new StackPane(l);
         Scene scene = new Scene(stackPane, this.windowWidth, this.windowHeight);
         return scene;
+    }
+
+    public void startNavigator() {
+        this.stage.setScene(this.scenes[headIndex]);
+        this.stage.show();
     }
 
     /*
@@ -105,5 +113,12 @@ public class Navigator {
      */
     public boolean canPop() {
         return headIndex > 1;
+    }
+
+    /*
+     * Set the window title for the current stage.
+     */
+    public void setTitle(String title) {
+        this.stage.setTitle(title);
     }
 }
