@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class App extends Application {
     // private int counter = 0;
 
-    private int windowWidth = 640;
+    private int windowWidth = 1280;
     private int windowHeight = 480;
 
     private Navigator navigator;
@@ -29,7 +29,7 @@ public class App extends Application {
         this.navigator = new Navigator(stage, this.windowWidth, this.windowHeight,
                 splashPane.getPane());
         // helloWorldPane.getPane());
-        this.navigator.setTitle("Hello World!");
+        this.navigator.setTitle("Indian Flights");
         this.navigator.startNavigator();
 
         // Initialising database
@@ -42,7 +42,15 @@ public class App extends Application {
 
         System.out.println(new App().getGreeting());
 
-        // this.navigator.push(this.navigator.defaultScene);
+        // Initialising all the app pages
+
+        // Login Page
+
+        LoginPane loginPane = new LoginPane();
+
+        // Navigate to the first page
+
+        this.navigator.push(loginPane.getPane());
     }
 
     @Override

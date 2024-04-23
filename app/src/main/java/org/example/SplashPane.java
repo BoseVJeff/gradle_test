@@ -5,19 +5,17 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.effect.ImageInput;
 import javafx.scene.image.*;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;;
 
 public class SplashPane implements PaneInterface {
 
     private Image image;
-    // private
 
     SplashPane() {
-        System.out.println("System Dir: " + System.getProperty("user.dir"));
+        // System.out.println("System Dir: " + System.getProperty("user.dir"));
         System.out.println("Loading image...");
-        this.image = new Image("file:logo.jpg", false);
+        this.image = new Image("file:logo_solo.png", false);
         System.out.println("Loaded image!");
     }
 
@@ -29,10 +27,10 @@ public class SplashPane implements PaneInterface {
             System.err.println(this.image.getException().getMessage());
         }
 
-        Image img = new Image("file:logo.jpg");
+        // Image img = new Image("file:logo.jpg");
         ImageInput imginput = new ImageInput();
         Rectangle rect = new Rectangle();
-        imginput.setSource(img);
+        imginput.setSource(this.image);
         // imginput.setX(20);
         // imginput.setY(100);
         GridPane gridPane = new GridPane();
