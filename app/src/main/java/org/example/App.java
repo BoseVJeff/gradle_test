@@ -16,6 +16,8 @@ public class App extends Application {
 
     private Navigator navigator;
 
+    private DatabaseInterface databaseInterface;
+
     public String getGreeting() {
         return "Hello World!";
     }
@@ -23,40 +25,31 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws SQLException, InterruptedException {
         SplashPane splashPane = new SplashPane();
-        HelloWorldPane helloWorldPane = new HelloWorldPane();
+        // HelloWorldPane helloWorldPane = new HelloWorldPane();
         this.navigator = new Navigator(stage, this.windowWidth, this.windowHeight,
                 splashPane.getPane());
         // helloWorldPane.getPane());
         this.navigator.setTitle("Hello World!");
         this.navigator.startNavigator();
 
-        DatabaseInterface databaseInterface = new Database();
+        // Initialising database
 
-        databaseInterface.testDatabaseConnection();
+        this.databaseInterface = new Database();
 
-        databaseInterface.cleanup();
+        this.databaseInterface.testDatabaseConnection();
 
         // Thread.sleep(1000);
 
         System.out.println(new App().getGreeting());
 
-        this.navigator.push(this.navigator.defaultScene);
+        // this.navigator.push(this.navigator.defaultScene);
+    }
 
-        // // Image img = new
-        // // Image("https://static.javatpoint.com/images/404-javatpoint.gif");
-        // Image img = new Image("file:logo.jpg");
-        // ImageInput imginput = new ImageInput();
-        // Rectangle rect = new Rectangle();
-        // imginput.setSource(img);
-        // imginput.setX(20);
-        // imginput.setY(100);
-        // Group root = new Group();
-        // rect.setEffect(imginput);
-        // root.getChildren().add(rect);
-        // Scene scene = new Scene(root, 530, 500, Color.BLACK);
-        // stage.setScene(scene);
-        // stage.setTitle("ImageInput Example");
-        // stage.show();
+    @Override
+    public void stop() throws Exception {
+        System.out.println("Cleaning up database connection");
+        this.databaseInterface.cleanup();
+        super.stop();
     }
 
     public static void main(String[] args) {
