@@ -1,6 +1,7 @@
 package org.example;
 
 import javafx.stage.Stage;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -21,7 +22,7 @@ public class Navigator {
     // The stage that the navigator works on
     private Stage stage;
     // The default scene
-    private Scene defaultScene;
+    public Scene defaultScene;
 
     /*
      * Setup an empty navigator for a given Stage.
@@ -54,7 +55,7 @@ public class Navigator {
      * Setup a naviagtor with the given intialPane with the given window dimensions
      * for the given stage.
      */
-    Navigator(Stage stage, int windowWidth, int windowHeight, StackPane initialPane) {
+    Navigator(Stage stage, int windowWidth, int windowHeight, Parent initialPane) {
         this.stage = stage;
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;
@@ -75,23 +76,25 @@ public class Navigator {
     }
 
     public void startNavigator() {
-        this.stage.setScene(this.scenes[headIndex]);
         this.stage.show();
-    }
-
-    /*
-     * Set the default scene that is used when the navigator stack is empty.
-     */
-    public void setDefaultScene(Scene scene) {
-        this.defaultScene = scene;
+        this.stage.setScene(this.scenes[headIndex]);
     }
 
     /*
      * Push a pane onto the stack of pages.
      */
-    public void push(StackPane pane) {
+    public void push(Parent pane) {
         headIndex++;
         this.scenes[headIndex] = new Scene(pane, this.windowWidth, this.windowHeight);
+        this.stage.setScene(this.scenes[headIndex]);
+    }
+
+    /*
+     * Push a scene onto the stack of pages.
+     */
+    public void push(Scene scene) {
+        headIndex++;
+        this.scenes[headIndex] = scene;
         this.stage.setScene(this.scenes[headIndex]);
     }
 
