@@ -3,8 +3,6 @@ package org.example;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,9 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
@@ -27,15 +22,11 @@ import javafx.scene.text.Text;
 
 public class LoginPane implements PaneInterface {
 
-    private GridPane gridPane;
+    private StackPane stackPane;
 
     LoginPane() {
-    }
-
-    @Override
-    public Parent getPane() {
-        StackPane stackPane = new StackPane();
-        stackPane.setAlignment(Pos.CENTER);
+        this.stackPane = new StackPane();
+        this.stackPane.setAlignment(Pos.CENTER);
 
         TilePane tilePane = new TilePane(Orientation.HORIZONTAL);
 
@@ -91,10 +82,14 @@ public class LoginPane implements PaneInterface {
         scrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
         scrollPane.setFitToWidth(true);
 
-        stackPane.getChildren().add(scrollPane);
+        this.stackPane.getChildren().add(scrollPane);
         // stackPane.getChildren().add(tilePane);
+    }
 
-        return stackPane;
+    @Override
+    public Parent getPane() {
+
+        return this.stackPane;
     }
 
 }
